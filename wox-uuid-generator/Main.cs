@@ -17,6 +17,7 @@ namespace wox_uuid_generator
             var results = new List<Result>();
             var ids = new List<string>();
             bool base64 = false;
+            bool v1 = false;
 
             int count = 1;
 
@@ -24,6 +25,9 @@ namespace wox_uuid_generator
                 string opt = query.Terms[i];
                 if (opt.ToUpper() == "B") {
                     base64 = true;
+                }
+                if (opt.ToUpper() == "V1") {
+                    v1 = true;
                 } else {
                     int x = 0;
                     if (int.TryParse(opt, out x)) {
@@ -33,7 +37,11 @@ namespace wox_uuid_generator
             }
 
             for (int i = 0; i < count; ++i) {
-                ids.Add(Guid.NewGuid().ToString());
+                if (v1) {
+                    ids.Add(NewSequentialGuid().ToString());
+                } else {
+                    ids.Add(Guid.NewGuid().ToString());
+                }
             }
 
             //Basic
@@ -163,5 +171,28 @@ namespace wox_uuid_generator
 
             return results;
         }
+
+        private static Guid NewSequentialGuid() {
+            GUIDDATA guiddata;
+
+            if ((UuidCreateSequential(out guiddata) & 0x80000000) != 0) // FAILED(hr)  
+                throw new InvalidOperationException();
+            return new Guid(guiddata.Data1, guiddata.Data2, guiddata.Data3, guiddata.Data4);
+        }
+
+        #region API  
+        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        private struct GUIDDATA
+        {
+            public int Data1;
+            public short Data2;
+            public short Data3;
+            [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValArray, SizeConst = 8)]
+            public byte[] Data4;
+        }
+
+        [System.Runtime.InteropServices.DllImport("rpcrt4.dll")]
+        private static extern int UuidCreateSequential(out GUIDDATA Uuid);
+        #endregion
     }
 }
