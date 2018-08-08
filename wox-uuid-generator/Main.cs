@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using Wox.Plugin;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ namespace wox_uuid_generator
         public List<Result> Query(Query query) {
             var results = new List<Result>();
             var ids = new List<string>();
+            bool base64 = false;
 
             int count = 1;
 
@@ -25,6 +27,13 @@ namespace wox_uuid_generator
                 }
             }
 
+            if (query.Terms.Count() > 2) {
+                string opt = query.Terms[2];
+                if(opt.ToUpper() == "B") {
+                    base64 = true;
+                }
+            }
+
             for (int i = 0; i < count; ++i) {
                 ids.Add(Guid.NewGuid().ToString());
             }
@@ -32,11 +41,17 @@ namespace wox_uuid_generator
             //Basic
             results.Add(new Result() {
                 Title = String.Join(", ", ids),
-                SubTitle = "Copy to clipboard",
+                SubTitle = $"Copy to clipboard{(base64 ? " Base64 encoded" : "")}",
                 IcoPath = "Images\\icon.png",  //relative path to your plugin directory
                 Action = e => {
                     // after user selects the item
-                    Clipboard.SetText(String.Join("\n", ids) + "\n");
+                    var result = "";
+                    if(base64) {
+                        result = String.Join("\n", ids.Select(b => Convert.ToBase64String(Encoding.UTF8.GetBytes(b)))) + "\n";
+                    } else {
+                        result = String.Join("\n", ids) + "\n";
+                    }
+                    Clipboard.SetText(result);
 
                     // return false to tell Wox not to hide thequery window, otherwise Wox will hide it automatically
                     return true;
@@ -47,11 +62,17 @@ namespace wox_uuid_generator
             //Uppercase
             results.Add(new Result() {
                 Title = String.Join(", ", uppercase),
-                SubTitle = "Uppercase - Copy to clipboard",
+                SubTitle = $"Uppercase - Copy to clipboard{(base64 ? " Base64 encoded" : "")}",
                 IcoPath = "Images\\icon.png",  //relative path to your plugin directory
                 Action = e => {
                     // after user selects the item
-                    Clipboard.SetText(String.Join("\n", uppercase) + "\n");
+                    var result = "";
+                    if (base64) {
+                        result = String.Join("\n", uppercase.Select(b => Convert.ToBase64String(Encoding.UTF8.GetBytes(b)))) + "\n";
+                    } else {
+                        result = String.Join("\n", uppercase) + "\n";
+                    }
+                    Clipboard.SetText(result);
 
                     // return false to tell Wox not to hide thequery window, otherwise Wox will hide it automatically
                     return true;
@@ -62,11 +83,17 @@ namespace wox_uuid_generator
             //Braces
             results.Add(new Result() {
                 Title = String.Join(", ", braces),
-                SubTitle = "With braces - Copy to clipboard",
+                SubTitle = $"With braces - Copy to clipboard{(base64 ? " Base64 encoded" : "")}",
                 IcoPath = "Images\\icon.png",  //relative path to your plugin directory
                 Action = e => {
                     // after user selects the item
-                    Clipboard.SetText(String.Join("\n", braces) + "\n");
+                    var result = "";
+                    if (base64) {
+                        result = String.Join("\n", braces.Select(b => Convert.ToBase64String(Encoding.UTF8.GetBytes(b)))) + "\n";
+                    } else {
+                        result = String.Join("\n", braces) + "\n";
+                    }
+                    Clipboard.SetText(result);
 
                     // return false to tell Wox not to hide thequery window, otherwise Wox will hide it automatically
                     return true;
@@ -77,11 +104,17 @@ namespace wox_uuid_generator
             var uppercaseBraces = ids.Select(t => $"{{{t.ToUpper()}}}");
             results.Add(new Result() {
                 Title = String.Join(", ", uppercaseBraces),
-                SubTitle = "With braces, uppercase - Copy to clipboard",
+                SubTitle = $"With braces, uppercase - Copy to clipboard{(base64 ? " Base64 encoded" : "")}",
                 IcoPath = "Images\\icon.png",  //relative path to your plugin directory
                 Action = e => {
                     // after user selects the item
-                    Clipboard.SetText(String.Join("\n", uppercaseBraces) + "\n");
+                    var result = "";
+                    if (base64) {
+                        result = String.Join("\n", uppercaseBraces.Select(b => Convert.ToBase64String(Encoding.UTF8.GetBytes(b)))) + "\n";
+                    } else {
+                        result = String.Join("\n", uppercaseBraces) + "\n";
+                    }
+                    Clipboard.SetText(result);
 
                     // return false to tell Wox not to hide thequery window, otherwise Wox will hide it automatically
                     return true;
@@ -92,11 +125,17 @@ namespace wox_uuid_generator
             var noHyphens = ids.Select(t => t.Replace("-", ""));
             results.Add(new Result() {
                 Title = String.Join(", ", noHyphens),
-                SubTitle = "No hyphens - Copy to clipboard",
+                SubTitle = $"No hyphens - Copy to clipboard{(base64 ? " Base64 encoded" : "")}",
                 IcoPath = "Images\\icon.png",  //relative path to your plugin directory
                 Action = e => {
                     // after user selects the item
-                    Clipboard.SetText(String.Join("\n", noHyphens) + "\n");
+                    var result = "";
+                    if (base64) {
+                        result = String.Join("\n", noHyphens.Select(b => Convert.ToBase64String(Encoding.UTF8.GetBytes(b)))) + "\n";
+                    } else {
+                        result = String.Join("\n", noHyphens) + "\n";
+                    }
+                    Clipboard.SetText(result);
 
                     // return false to tell Wox not to hide thequery window, otherwise Wox will hide it automatically
                     return true;
@@ -107,11 +146,17 @@ namespace wox_uuid_generator
             var uppercaseNoHyphens = ids.Select(t => t.Replace("-", "").ToUpper());
             results.Add(new Result() {
                 Title = String.Join(", ", uppercaseNoHyphens),
-                SubTitle = "No hyphens, uppercase - Copy to clipboard",
+                SubTitle = $"No hyphens, uppercase - Copy to clipboard{(base64 ? " Base64 encoded" : "")}",
                 IcoPath = "Images\\icon.png",  //relative path to your plugin directory
                 Action = e => {
                     // after user selects the item
-                    Clipboard.SetText(String.Join("\n", uppercaseNoHyphens) + "\n");
+                    var result = "";
+                    if (base64) {
+                        result = String.Join("\n", uppercaseNoHyphens.Select(b => Convert.ToBase64String(Encoding.UTF8.GetBytes(b)))) + "\n";
+                    } else {
+                        result = String.Join("\n", uppercaseNoHyphens) + "\n";
+                    }
+                    Clipboard.SetText(result);
 
                     // return false to tell Wox not to hide thequery window, otherwise Wox will hide it automatically
                     return true;
