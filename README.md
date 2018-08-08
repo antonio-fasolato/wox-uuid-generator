@@ -4,6 +4,8 @@
 
 ![Example](https://antonio-fasolato.github.io/wox-uuid-generator/example.png)
 
+You can find the WoX plugin pahe [here](http://www.wox.one/plugin/106)
+
 ## Installation
 
 Download [WoX](http://www.wox.one) then follow its [guide](http://doc.wox.one/en/plugin/install_plugin.html) to download a plugin.
