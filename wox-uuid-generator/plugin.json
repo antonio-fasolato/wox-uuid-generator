@@ -6,7 +6,7 @@
   "Author": "Antonio Fasolato", //Plugin Author
   "Version": "1.0.0", //Plugin version，must be x.x.x format
   "Language": "csharp", //Plugin language，we support csharp,python and executable now
-  "Website": "http://www.getwox.com", //Plugin website or author website
-  "IcoPath": "Images\\pic.png", //Plugin icon, relative path to the pluign folder
+  "Website": "https://github.com/antonio-fasolato/wox-uuid-generator", //Plugin website or author website
+  "IcoPath": "Images\\icon.png", //Plugin icon, relative path to the pluign folder
   "ExecuteFileName": "wox-uuid-generator.dll" //Execution entry. Dll name for c# plugin, and python file for python plugin
 }
