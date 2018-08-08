@@ -4,7 +4,7 @@
   "Name": "UUID-generator",
   "Description": "Random UUID generator",
   "Author": "Antonio Fasolato",
-  "Version": "1.0.0",
+  "Version": "1.1.0",
   "Language": "csharp",
   "Website": "https://github.com/antonio-fasolato/wox-uuid-generator",
   "IcoPath": "Images\\icon.png",
