@@ -20,17 +20,15 @@ namespace wox_uuid_generator
 
             int count = 1;
 
-            if(query.Terms.Count() > 1) {
-                int x = 0;
-                if(int.TryParse(query.Terms[1], out x)) {
-                    count = x;
-                }
-            }
-
-            if (query.Terms.Count() > 2) {
-                string opt = query.Terms[2];
-                if(opt.ToUpper() == "B") {
+            for(int i = 1; i < query.Terms.Count(); ++i) {
+                string opt = query.Terms[i];
+                if (opt.ToUpper() == "B") {
                     base64 = true;
+                } else {
+                    int x = 0;
+                    if (int.TryParse(opt, out x)) {
+                        count = x;
+                    }
                 }
             }
 
