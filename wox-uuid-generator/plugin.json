@@ -1,12 +1,12 @@
 ﻿{
-  "ID": "c537edb6c1a54f61bd8a248a88a21e84", //Plugin ID，32 bit UUID
-  "ActionKeyword": "uuid", //Plugin default action keyword
-  "Name": "UUID-generator", //Plugin name
-  "Description": "Random UUID generator", //Plugin description
-  "Author": "Antonio Fasolato", //Plugin Author
-  "Version": "1.0.0", //Plugin version，must be x.x.x format
-  "Language": "csharp", //Plugin language，we support csharp,python and executable now
-  "Website": "https://github.com/antonio-fasolato/wox-uuid-generator", //Plugin website or author website
-  "IcoPath": "Images\\icon.png", //Plugin icon, relative path to the pluign folder
-  "ExecuteFileName": "wox-uuid-generator.dll" //Execution entry. Dll name for c# plugin, and python file for python plugin
+  "ID": "c537edb6c1a54f61bd8a248a88a21e84",
+  "ActionKeyword": "uuid",
+  "Name": "UUID-generator",
+  "Description": "Random UUID generator",
+  "Author": "Antonio Fasolato",
+  "Version": "1.0.0",
+  "Language": "csharp",
+  "Website": "https://github.com/antonio-fasolato/wox-uuid-generator",
+  "IcoPath": "Images\\icon.png",
+  "ExecuteFileName": "wox-uuid-generator.dll"
 }
