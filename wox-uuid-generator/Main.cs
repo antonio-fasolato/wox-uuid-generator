@@ -17,7 +17,7 @@ namespace wox_uuid_generator
             results.Add(new Result() {
                 Title = id,
                 SubTitle = "Copy to clipboard",
-                IcoPath = "Images\\plugin.png",  //relative path to your plugin directory
+                IcoPath = "Images\\icon.png",  //relative path to your plugin directory
                 Action = e => {
                     // after user selects the item
                     Clipboard.SetText(id);
